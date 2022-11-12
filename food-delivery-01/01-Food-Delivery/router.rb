@@ -1,16 +1,17 @@
 class Router
-  def initialize(meals_controller, customers_controller, sessions_controller)
+  def initialize(meals_controller, customers_controller, sessions_controller, orders_controller)
     @running = true
     @meals_controller = meals_controller
     @customers_controller = customers_controller
     @sessions_controller = sessions_controller
+    @orders_controller = orders_controller
   end
 
   def run
-    employee = @sessions_controller.sign_in
+    @employee = @sessions_controller.sign_in
 
     while @running
-      if employee.role == 'manager'
+      if @employee.role == 'manager'
         print_manager_options
         user_answer = gets.chomp
 
@@ -31,8 +32,8 @@ class Router
     when '2' then @meals_controller.list
     when '3' then @customers_controller.add
     when '4' then @customers_controller.list
-    when '5' then puts 'TO-DO: Create a new order'
-    when '6' then puts 'TO-DO: List all undelivered orders'
+    when '5' then @orders_controller.add
+    when '6' then @orders_controller.list_undelivered_orders
     when '9' then stop_running
     else
       puts 'Please enter a valid option'
@@ -41,8 +42,8 @@ class Router
 
   def route_rider_to(user_answer)
     case user_answer
-    when '1' then puts 'TO-DO: Mark an order as delivered'
-    when '2' then puts 'TO-DO: List my undelivered orders'
+    when '1' then @orders_controller.mark_as_delivered(@employee)
+    when '2' then @orders_controller.list_my_orders(@employee)
     when '9' then stop_running
     else
       puts 'Please enter a valid option'
