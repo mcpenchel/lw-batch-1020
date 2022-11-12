@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'csv'
 require_relative '../models/employee'
 
@@ -5,7 +7,7 @@ class EmployeeRepository
   def initialize(csv_file_path)
     @employees = []
     @csv_file_path = csv_file_path
-    load_csv if File.exists?(@csv_file_path)
+    load_csv if File.exist?(@csv_file_path)
   end
 
   # Se não tem escrita,
@@ -31,6 +33,7 @@ class EmployeeRepository
   end
 
   private
+
   def load_csv
     # HOJE fazemos leitura de CSV
     # AMANHÃ podemos trocar, e fazer leitura de XML
@@ -41,7 +44,7 @@ class EmployeeRepository
     # em como o EmployeeRepository carrega a informação para um array de instâncias.
 
     CSV.foreach(@csv_file_path, headers: :first_row, header_converters: :symbol) do |row|
-      row[:id]    = row[:id].to_i
+      row[:id] = row[:id].to_i
 
       @employees << Employee.new(row)
     end

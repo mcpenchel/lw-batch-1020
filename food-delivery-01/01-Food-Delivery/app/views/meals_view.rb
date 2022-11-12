@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class MealsView
   def ask_for_name
     puts 'What\'s the meal name?'

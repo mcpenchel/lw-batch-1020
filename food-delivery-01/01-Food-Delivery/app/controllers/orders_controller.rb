@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative '../views/orders_view'
 require_relative '../models/order'
 

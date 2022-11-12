@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # The app.rb file is responsible for requiring all the necessary files,
 # instantiating a router and executing its run method to launch the app.
 require 'csv'

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Router
   def initialize(meals_controller, customers_controller, sessions_controller, orders_controller)
     @running = true
@@ -26,6 +28,7 @@ class Router
   end
 
   private
+
   def route_manager_to(user_answer)
     case user_answer
     when '1' then @meals_controller.add

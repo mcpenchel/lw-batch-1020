@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SessionsView
   def ask_for_username
     puts 'username?'

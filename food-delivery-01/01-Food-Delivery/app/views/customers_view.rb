@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CustomersView
   def ask_for_name
     puts 'What\'s the customer name?'

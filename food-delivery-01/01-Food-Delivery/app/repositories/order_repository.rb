@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class OrderRepository
   def initialize(csv_file_path, meal_repo, customer_repo, employee_repo)
     @csv_file_path = csv_file_path
@@ -8,7 +10,7 @@ class OrderRepository
 
     @orders = []
 
-    load_csv if File.exists?(@csv_file_path)
+    load_csv if File.exist?(@csv_file_path)
   end
 
   def mark_as_delivered!(order)
@@ -25,10 +27,11 @@ class OrderRepository
   end
 
   def undelivered_orders
-    @orders.reject { |order| order.delivered? }
+    @orders.reject(&:delivered?)
   end
 
   private
+
   def load_csv
     CSV.foreach(@csv_file_path, headers: :first_row, header_converters: :symbol) do |row|
       @orders << Order.new(
@@ -43,7 +46,7 @@ class OrderRepository
 
   def save_csv
     CSV.open(@csv_file_path, 'wb') do |csv|
-      csv << ['id', 'delivered', 'meal_id', 'customer_id', 'employee_id']
+      csv << %w[id delivered meal_id customer_id employee_id]
 
       @orders.each do |order|
         csv << [order.id, order.delivered?, order.meal.id, order.customer.id, order.employee.id]

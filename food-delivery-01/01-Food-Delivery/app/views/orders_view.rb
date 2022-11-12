@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class OrdersView
   def list_meals_and_ask_for_index(meals)
     meals.each_with_index do |meal, index|

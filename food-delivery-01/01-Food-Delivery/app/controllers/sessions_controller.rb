@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative '../views/sessions_view'
 
 class SessionsController
@@ -22,7 +24,7 @@ class SessionsController
     if employee && employee.password == password
       @view.successfull_sign_in(employee)
 
-      return employee
+      employee
     else
       @view.wrong_credentials
 

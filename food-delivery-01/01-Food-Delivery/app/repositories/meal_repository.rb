@@ -1,10 +1,11 @@
-class MealRepository
+# frozen_string_literal: true
 
+class MealRepository
   # It reads and writes the meals from the CSV file and holds them as objects in an array.
   def initialize(csv_file_path)
     @meals = []
     @csv_file_path = csv_file_path
-    load_csv if File.exists?(@csv_file_path)
+    load_csv if File.exist?(@csv_file_path)
   end
 
   # create a new meal]
@@ -35,9 +36,10 @@ class MealRepository
   end
 
   private
+
   def save_csv
-    CSV.open(@csv_file_path, "wb") do |csv|
-      csv << ['id', 'name', 'price']
+    CSV.open(@csv_file_path, 'wb') do |csv|
+      csv << %w[id name price]
       # devo eu colocar isso dentro ou fora do loop?
       # resposta: esse comando deve ser executado + de uma vez?
       @meals.each do |meal|
